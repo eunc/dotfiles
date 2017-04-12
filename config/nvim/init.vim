@@ -1,4 +1,4 @@
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/dotfiles/config/nvim/plugged')
 
 " COLORSCHEMES "
 Plug 'junegunn/seoul256.vim'
@@ -7,10 +7,15 @@ Plug 'junegunn/seoul256.vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
+Plug 'ervandew/supertab'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'benmills/vimux'
+Plug 'sickill/vim-pasta'
 
 " SYNTAX "
 Plug 'scrooloose/syntastic', {'on':[]}
-"Plug 'neomake/neomake'
 
 " AUTOCOMPLETE "
 Plug 'Valloric/YouCompleteMe', {'on':[]}
@@ -45,6 +50,7 @@ set shiftround
 set completeopt+=longest
 set lazyredraw
 set cursorline
+set clipboard=unnamed
 set dir=~/.config/nvim/backups
 
 "=============KEYBINDINGS==========="
