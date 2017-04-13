@@ -25,7 +25,7 @@ call plug#end()
 
 augroup load_plug
 	autocmd!
-	autocmd InsertEnter * call plug#load('YouCompleteMe', 'syntastic')
+	autocmd InsertEnter * call plug#load('syntastic')
 				\| autocmd! load_plug
 augroup END
 

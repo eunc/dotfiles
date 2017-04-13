@@ -7,16 +7,26 @@ export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 alias vim='nvim'
-alias vi='nvim'
+alias v='nvim'
+
 alias cl='clear'
+alias cls='clear'
+alias c='clear'
+
 alias l='ls-la'
 alias ..='cd ..'
+
+alias rm='trash'
+
+alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
+alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
 
+cowsay $(fortune -a)
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
