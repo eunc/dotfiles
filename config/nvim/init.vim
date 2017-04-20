@@ -10,29 +10,32 @@ Plug 'tpope/vim-commentary'
 Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-rhubarb' " gBrowse
 Plug 'benmills/vimux'
 Plug 'sickill/vim-pasta'
+Plug 'kien/ctrlp.vim', {'on': ['CtrlP']}
+Plug 'rking/ag.vim'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " SYNTAX "
 Plug 'scrooloose/syntastic', {'on':[]}
 
 " AUTOCOMPLETE "
-Plug 'Valloric/YouCompleteMe', {'on':[]}
+Plug 'Valloric/YouCompleteMe', {'on':[], 'do':'./install.py'}
 "Plug 'rdnetto/YCM-Generator'
 
 call plug#end()
 
 augroup load_plug
 	autocmd!
-	autocmd InsertEnter * call plug#load('syntastic')
+	autocmd InsertEnter * call plug#load('syntastic', 'YouCompleteMe')
 				\| autocmd! load_plug
 augroup END
 
 "==============SETTINGS============="
 set encoding=utf8
 set number
-set wrap
+" set wrap
 set wrapmargin=8
 set linebreak
 set autoindent
@@ -51,6 +54,7 @@ set completeopt+=longest
 set lazyredraw
 set cursorline
 set clipboard=unnamed
+set wildignorecase
 set dir=~/.config/nvim/backups
 
 "=============KEYBINDINGS==========="
@@ -76,6 +80,7 @@ nnoremap <leader>9 9gt
 
 nnoremap <silent> <leader>c :Commentary<cr>
 nnoremap <leader>q <c-w>z
+nnoremap <silent> <leader>p :CtrlP<cr>
 
 " color schemes and airline "
 colorscheme seoul256
@@ -95,3 +100,22 @@ syntax enable
 let g:airline_powerline_fonts=1
 " let g:airline_theme='oceanicnext'
 let g:airline_theme='base16'
+
+" ctrlp "
+if executable('ag')
+	set grepprg=ag\ --nogroup\ --nocolor
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_custom_ignore={
+			\ 'dir': '\.git$\|public$|log\|tmp$',
+			\ 'file': '\.DS_Store$'
+			\}
+let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:working_path_mode='ra'
+
+" Compile and Run
+autocmd filetype cpp nnoremap <F8> :w<CR>:!g++ -std=c++11 % -o%< && ./%<<CR>
+autocmd filetype c   nnoremap <F8> :w<CR>:!gcc % -o%< && ./%<<CR>
+autocmd filetype python nnoremap <F8> :w <bar> exec '!python3 '.shellescape('%')<CR>
+autocmd filetype arduino nnoremap <F8> :w<CR>:!processing-java --sketch=./% --run<CR>

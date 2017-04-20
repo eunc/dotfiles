@@ -26,7 +26,7 @@ alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall F
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
 
-cowsay $(fortune -a)
+# cowsay $(fortune -a)
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
