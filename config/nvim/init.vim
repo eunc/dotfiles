@@ -50,11 +50,12 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
-set completeopt+=longest
+set completeopt+=noselect,menuone,preview
 set lazyredraw
 set cursorline
 set clipboard=unnamed
 set wildignorecase
+set backspace=indent,eol,start
 set dir=~/.config/nvim/backups
 
 "=============KEYBINDINGS==========="
