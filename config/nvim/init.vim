@@ -35,7 +35,6 @@ augroup END
 "==============SETTINGS============="
 set encoding=utf8
 set number
-" set wrap
 set wrapmargin=8
 set linebreak
 set autoindent
