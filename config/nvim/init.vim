@@ -49,12 +49,14 @@ set softtabstop=4
 set shiftwidth=4
 set shiftround
 set completeopt+=noselect,menuone,preview
-set lazyredraw
+" set lazyredraw
 set cursorline
 set clipboard=unnamed
 set wildignorecase
 " set backspace=indent,eol,start
 set dir=~/.config/nvim/backups
+
+let g:netrw_dirhistmax=0
 
 "=============KEYBINDINGS==========="
 let mapleader = ' '
@@ -76,6 +78,9 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
+
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
 
 nnoremap <silent> <leader>c :Commentary<cr>
 nnoremap <leader>q <c-w>z
@@ -127,18 +132,20 @@ let g:syntastic_check_on_wq = 0
 " YCM "
 let g:ycm_register_as_syntastic_checker=0
 
+set re=1
+
 " Compile and Run "
 autocmd filetype cpp nnoremap <F8> :w<CR>:!g++ -std=c++11 % -o%< && ./%<<CR>
 autocmd filetype c   nnoremap <F8> :w<CR>:!gcc % -o%< && ./%<<CR>
 autocmd filetype python nnoremap <F8> :w <bar> exec '!python3 '.shellescape('%')<CR>
 autocmd filetype arduino nnoremap <F8> :w<CR>:!processing-java --sketch=./% --run<CR>
 
-function! BuildProject()
-	set makeprg=build.sh
-	silent make
-	copen
-	echo "Build Complete"
-endfunction
-nnoremap <c-m> :call BuildProject()<CR>
-nnoremap <c-n> :cn<CR>
-nnoremap <c-p> :cp<CR>
+" function! BuildProject()
+" 	set makeprg=build.sh
+" 	silent make
+" 	copen
+" 	echo "Build Complete"
+" endfunction
+" nnoremap <c-m> :call BuildProject()<CR>
+" nnoremap <c-n> :cn<CR>
+" nnoremap <c-p> :cp<CR>
