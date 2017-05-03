@@ -15,22 +15,21 @@ Plug 'benmills/vimux'
 Plug 'sickill/vim-pasta'
 Plug 'kien/ctrlp.vim', {'on': ['CtrlP']}
 Plug 'rking/ag.vim'
-Plug 'nathanaelkane/vim-indent-guides'
 
 " SYNTAX "
-Plug 'scrooloose/syntastic', {'on':[]}
+Plug 'scrooloose/syntastic'
 
 " AUTOCOMPLETE "
-Plug 'Valloric/YouCompleteMe', {'on':[], 'do':'./install.py'}
-"Plug 'rdnetto/YCM-Generator'
+Plug 'Valloric/YouCompleteMe'
+" Plug 'rdnetto/YCM-Generator', {'branch': 'stable'} 
 
 call plug#end()
 
-augroup load_plug
-	autocmd!
-	autocmd InsertEnter * call plug#load('syntastic', 'YouCompleteMe')
-				\| autocmd! load_plug
-augroup END
+" augroup load_plug
+" 	autocmd!
+" 	autocmd InsertEnter * call plug#load('YouCompleteMe')
+" 				\| autocmd! load_plug
+" augroup END
 
 "==============SETTINGS============="
 set encoding=utf8
@@ -54,7 +53,7 @@ set lazyredraw
 set cursorline
 set clipboard=unnamed
 set wildignorecase
-set backspace=indent,eol,start
+" set backspace=indent,eol,start
 set dir=~/.config/nvim/backups
 
 "=============KEYBINDINGS==========="
@@ -114,8 +113,32 @@ let g:ctrlp_clear_cache_on_exit=0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:working_path_mode='ra'
 
-" Compile and Run
+" Syntastic "
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_cpp_checkers = ['gcc']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" YCM "
+let g:ycm_register_as_syntastic_checker=0
+
+" Compile and Run "
 autocmd filetype cpp nnoremap <F8> :w<CR>:!g++ -std=c++11 % -o%< && ./%<<CR>
 autocmd filetype c   nnoremap <F8> :w<CR>:!gcc % -o%< && ./%<<CR>
 autocmd filetype python nnoremap <F8> :w <bar> exec '!python3 '.shellescape('%')<CR>
 autocmd filetype arduino nnoremap <F8> :w<CR>:!processing-java --sketch=./% --run<CR>
+
+function! BuildProject()
+	set makeprg=build.sh
+	silent make
+	copen
+	echo "Build Complete"
+endfunction
+nnoremap <c-m> :call BuildProject()<CR>
+nnoremap <c-n> :cn<CR>
+nnoremap <c-p> :cp<CR>
