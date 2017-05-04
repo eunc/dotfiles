@@ -4,7 +4,7 @@ call plug#begin('~/dotfiles/config/nvim/plugged')
 Plug 'junegunn/seoul256.vim'
 
 " UTILITIES "
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'ervandew/supertab'
@@ -55,7 +55,6 @@ set clipboard=unnamed
 set wildignorecase
 " set backspace=indent,eol,start
 set dir=~/.config/nvim/backups
-
 let g:netrw_dirhistmax=0
 
 "=============KEYBINDINGS==========="
@@ -78,7 +77,6 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
-
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
@@ -115,6 +113,8 @@ let g:ctrlp_custom_ignore={
 			\ 'file': '\.DS_Store$'
 			\}
 let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:working_path_mode='ra'
 
@@ -135,10 +135,9 @@ let g:ycm_register_as_syntastic_checker=0
 set re=1
 
 " Compile and Run "
-autocmd filetype cpp nnoremap <F8> :w<CR>:!g++ -std=c++11 % -o%< && ./%<<CR>
-autocmd filetype c   nnoremap <F8> :w<CR>:!gcc % -o%< && ./%<<CR>
-autocmd filetype python nnoremap <F8> :w <bar> exec '!python3 '.shellescape('%')<CR>
-autocmd filetype arduino nnoremap <F8> :w<CR>:!processing-java --sketch=./% --run<CR>
+autocmd filetype cpp nnoremap <F8> :w<cr>:lcd %:p:h<cr>:te g++ -std=c++11 % -o%< && ./%<<cr>
+autocmd filetype c nnoremap <F8> :w<cr>:lcd %:p:h<cr>:te gcc % -o%< && ./%<<cr>
+autocmd filetype python nnoremap <F8> :w<cr>:lcd %:p:h<cr>:te python3 %<cr>
 
 " function! BuildProject()
 " 	set makeprg=build.sh
