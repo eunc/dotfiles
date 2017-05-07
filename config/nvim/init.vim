@@ -18,6 +18,7 @@ Plug 'rking/ag.vim'
 
 " SYNTAX "
 Plug 'scrooloose/syntastic'
+" Plug 'neomake/neomake'
 
 " AUTOCOMPLETE "
 Plug 'Valloric/YouCompleteMe'
@@ -30,6 +31,10 @@ call plug#end()
 " 	autocmd InsertEnter * call plug#load('YouCompleteMe')
 " 				\| autocmd! load_plug
 " augroup END
+
+"==========Python Directory========="
+let g:python_host_prog='/usr/local/bin/python'
+let g:python3_host_prog='/usr/local/bin/python3.6'
 
 "==============SETTINGS============="
 set encoding=utf8
@@ -48,10 +53,11 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
-set completeopt+=noselect,menuone,preview
-" set lazyredraw
+set completeopt+=noselect,menuone,longest
+set completeopt-=preview
+set lazyredraw
 set cursorline
-set clipboard=unnamed
+" set clipboard=unnamed
 set wildignorecase
 " set backspace=indent,eol,start
 set dir=~/.config/nvim/backups
@@ -119,20 +125,34 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:working_path_mode='ra'
 
 " Syntastic "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_cpp_checkers = ['gcc']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_cpp_checkers = ['gcc']
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
 
 " YCM "
 let g:ycm_register_as_syntastic_checker=0
+let g:ycm_python_binary_path = '/usr/local/bin/python3.6'
 
-set re=1
+" Neomake "
+" autocmd! BufWritePost * Neomake
+" let g:neomake_cpp_enable_makers = ['clang']
+" let g:neomake_cpp_clang_maker = {
+			" \ }
+" let g:neomake_python_enabled_makers = ['flake8']
+" let g:neomake_python_flake8_maker = {
+    " \ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
+    " \ 'errorformat':
+        " \ '%E%f:%l: could not compile,%-Z%p^,' .
+        " \ '%A%f:%l:%c: %t%n %m,' .
+        " \ '%A%f:%l: %t%n %m,' .
+        " \ '%-G%.%#',
+    " \ }
 
 " Compile and Run "
 autocmd filetype cpp nnoremap <F8> :w<cr>:lcd %:p:h<cr>:te g++ -std=c++11 % -o%< && ./%<<cr>
