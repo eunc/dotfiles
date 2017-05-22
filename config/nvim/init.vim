@@ -7,14 +7,20 @@ Plug 'junegunn/seoul256.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
-Plug 'ervandew/supertab'
-Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb' " gBrowse
+Plug 'ervandew/supertab'
+Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'sickill/vim-pasta'
 Plug 'kien/ctrlp.vim', {'on': ['CtrlP']}
 Plug 'rking/ag.vim'
+Plug 'majutsushi/tagbar'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
 
 " SYNTAX "
 " Plug 'scrooloose/syntastic'
@@ -89,6 +95,7 @@ map 0 ^
 nnoremap <silent> <leader>c :Commentary<cr>
 nnoremap <leader>q <c-w>z
 nnoremap <silent> <leader>p :CtrlP<cr>
+nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " color schemes and airline "
 " Range: 252 (darkest) ~ 256 (lightest)
@@ -159,6 +166,18 @@ hi! NeomakeError cterm=underline ctermfg=white
 autocmd filetype cpp nnoremap <F8> :w<cr>:lcd %:p:h<cr>:vs<cr>:te g++ -std=c++11 % -o%< && ./%<<cr>
 autocmd filetype c nnoremap <F8> :w<cr>:lcd %:p:h<cr>:vs<cr>:te gcc % -o%< && ./%<<cr>
 autocmd filetype python nnoremap <F8> :w<cr>:lcd %:p:h<cr>:vs<cr>:te python3 %<cr>
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 " strip white space "
 " autocmd BufWritePre * %s/\s\+$//e
