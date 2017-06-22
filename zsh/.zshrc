@@ -5,8 +5,10 @@ export DEVKITARM=${DEVKITPRO}/devkitARM
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/Enhua/.oh-my-zsh
-# export TERM=xterm-256color
-# [ -n "$TMUX" ] && export TERM=screen-256color
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+# export NVIM_TUI_ENABLE_TRUE_COLOR = 1
+# export NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 alias vim='nvim'
 alias v='nvim'
