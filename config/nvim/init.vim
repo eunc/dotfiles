@@ -70,6 +70,7 @@ set cursorline
 set wildignorecase
 set nohlsearch
 set backspace=indent,eol,start
+" set spell
 set dir=~/.config/nvim/backups
 let g:netrw_dirhistmax=0
 
@@ -118,8 +119,50 @@ set background=dark
 
 " set statusline=%F\ %m%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%)\ %P
 let g:lightline = {
+			\ 'active': {
+			\	'left': [ ['mode', 'paste'], ['filename', 'modified'] ],
+			\	'right': [ ['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok'] ]
+			\ },
+			\ 'inactive': {
+			\	'left': [ ['filename'] ],
+			\	'right': [ ['percent'] ],
+			\ },
 			\ 'colorscheme': 'seoul256',
+			\ 'component_expand': {
+			\	'linter_warnings': 'LightlineLinterWarnings',
+			\	'linter_errors': 'LightlineLinterErrors',
+			\	'linter_ok': 'LightlineLinterOK'
+			\ },
+			\ 'component_type': {
+			\	'readonly': 'error',
+			\	'linter_warnings': 'warning',
+			\	'linter_errors': 'error'
+			\ },
 			\ }
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+autocmd User ALELint call lightline#update()
+
 hi! StatusLine ctermbg=white ctermfg=236
 
 " ctrlp "
@@ -159,6 +202,13 @@ let g:ycm_global_ycm_extra_conf = '~/dotfiles/config/nvim/plugged/YouCompleteMe/
 
 "hi! NeomakeErrorSign ctermfg=white ctermbg=235 guibg=gray20
 "hi! NeomakeError cterm=underline ctermfg=white
+
+" ale "
+let g:ale_sign_warning = '◆'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+let g:ale_python_flake8_args="--ignore=E501,E265,E221,W293"
 
 " Compile and Run "
 autocmd filetype cpp nnoremap <F8> :w<cr>:lcd %:p:h<cr>:vs<cr>:te g++ -std=c++11 % -o%< && ./%<<cr>
