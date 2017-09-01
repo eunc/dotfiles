@@ -35,11 +35,11 @@ Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 
-" augroup load_plug
-" 	autocmd!
-" 	autocmd InsertEnter * call plug#load('YouCompleteMe')
-" 				\| autocmd! load_plug
-" augroup END
+augroup load_plug
+	autocmd!
+	autocmd InsertEnter * call plug#load('YouCompleteMe')
+				\| autocmd! load_plug
+augroup END
 
 "==========Python Directory========="
 " let g:python_host_prog='/usr/local/bin/python'
