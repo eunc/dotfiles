@@ -1,10 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export DEVKITPRO=/Users/Enhua/devkitPro
-export DEVKITARM=${DEVKITPRO}/devkitARM
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/Enhua/.oh-my-zsh
+export ZSH=/Users/eunc/.oh-my-zsh
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 # export NVIM_TUI_ENABLE_TRUE_COLOR = 1
@@ -106,4 +104,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PS1="%~ > "

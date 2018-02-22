@@ -1,4 +1,4 @@
-call plug#begin('~/dotfiles/config/nvim/plugged')
+call plug#begin('~/dotfiles/vim/.config/nvim/plugged')
 
 " COLORSCHEMES "
 Plug 'junegunn/seoul256.vim'
@@ -182,7 +182,7 @@ let g:working_path_mode='ra'
 
 " YCM "
 " let g:ycm_python_binary_path = '/usr/local/bin/python3.6'
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
 
 " Neomake "
 "autocmd! BufWritePost * Neomake
