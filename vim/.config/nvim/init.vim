@@ -1,8 +1,8 @@
 call plug#begin('~/dotfiles/vim/.config/nvim/plugged')
 
 " COLORSCHEMES "
+Plug 'chriskempson/base16-vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'lifepillar/vim-solarized8'
 
 " UTILITIES "
 Plug 'itchyny/lightline.vim'
@@ -65,7 +65,7 @@ set shiftround
 set completeopt+=noselect,menuone,longest
 set completeopt-=preview
 set termguicolors
-" set lazyredraw
+set lazyredraw
 set cursorline
 " set clipboard=unnamed
 set wildignorecase
@@ -100,29 +100,19 @@ nnoremap <leader>q <c-w>z
 nnoremap <silent> <leader>p :CtrlP<cr>
 nnoremap <silent> <leader>t :TagbarToggle<CR>
 
-" color schemes and airline "
+filetype plugin indent on
+
+" seoul256 "
 " Light
 " Range: 252 (darkest) ~ 256 (lightest)
 " Default: 253
 " Dark
 " Range: 233 (darkest) ~ 239 (lightest)
 " Default: 237
-
-filetype plugin indent on
 syntax enable
 set background=dark
-colorscheme solarized8_flat
-
-" colorscheme seoul256-light
-" dark "
-" let g:seoul256_background=234
-" light "
-" let g:seoul256_light_background=256
-
-" set background=light
-
-" let g:airline_theme='base16'
-" let g:airline_powerline_fonts=0
+let g:seoul256_background=235
+colorscheme seoul256
 
 " set statusline=%F\ %m%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%)\ %P
 let g:lightline = {
@@ -134,7 +124,7 @@ let g:lightline = {
 			\	'left': [ ['filename'] ],
 			\	'right': [ ['percent'] ],
 			\ },
-			\ 'colorscheme': 'solarized',
+			\ 'colorscheme': 'seoul256',
 			\ 'component_expand': {
 			\	'linter_warnings': 'LightlineLinterWarnings',
 			\	'linter_errors': 'LightlineLinterErrors',
