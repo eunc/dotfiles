@@ -1,5 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/eunc/.oh-my-zsh
@@ -18,7 +21,7 @@ alias c='clear'
 alias l='ls-la'
 alias ..='cd ..'
 
-alias rm='trash'
+# alias rm='trash'
 
 alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
 alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
@@ -26,7 +29,7 @@ alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall F
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="agnoster"
+ZSH_THEME="agnoster"
 
 # cowsay $(fortune -a)
 # Uncomment the following line to use case-sensitive completion.
@@ -104,5 +107,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-export PS1="%~ > "
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# export PS1=" [ %~ ] ->  "

@@ -2,12 +2,14 @@ call plug#begin('~/dotfiles/vim/.config/nvim/plugged')
 
 " COLORSCHEMES "
 Plug 'junegunn/seoul256.vim'
+Plug 'lifepillar/vim-solarized8'
 
 " UTILITIES "
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'sodapopcan/vim-twiggy'
 Plug 'tpope/vim-rhubarb' " gBrowse
 Plug 'junegunn/gv.vim'
 Plug 'ervandew/supertab'
@@ -42,7 +44,6 @@ augroup load_plug
 augroup END
 
 "==========Python Directory========="
-" let g:python_host_prog='/usr/local/bin/python'
 " let g:python3_host_prog='/usr/local/bin/python3.6'
 
 "==============SETTINGS============="
@@ -63,14 +64,13 @@ set shiftwidth=4
 set shiftround
 set completeopt+=noselect,menuone,longest
 set completeopt-=preview
-" set termguicolors
+set termguicolors
 " set lazyredraw
 set cursorline
 " set clipboard=unnamed
 set wildignorecase
 set nohlsearch
 set backspace=indent,eol,start
-" set spell
 set dir=~/.config/nvim/backups
 let g:netrw_dirhistmax=0
 
@@ -78,7 +78,7 @@ let g:netrw_dirhistmax=0
 let mapleader = ' '
 let g:mapleader = ' '
 inoremap jk <esc>
-nnoremap <leader>v :e ~/.config/nvim/init.vim<cr>
+nnoremap <leader>v :e ~/dotfiles/vim/.config/nvim/init.vim<cr>
 nnoremap <leader>n :tabnew<cr>
 nnoremap <leader>0 0gt
 nnoremap <leader>1 1gt
@@ -110,9 +110,16 @@ nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 filetype plugin indent on
 syntax enable
-colorscheme seoul256
-let g:seoul256_background=234
 set background=dark
+colorscheme solarized8_flat
+
+" colorscheme seoul256-light
+" dark "
+" let g:seoul256_background=234
+" light "
+" let g:seoul256_light_background=256
+
+" set background=light
 
 " let g:airline_theme='base16'
 " let g:airline_powerline_fonts=0
@@ -127,7 +134,7 @@ let g:lightline = {
 			\	'left': [ ['filename'] ],
 			\	'right': [ ['percent'] ],
 			\ },
-			\ 'colorscheme': 'seoul256',
+			\ 'colorscheme': 'solarized',
 			\ 'component_expand': {
 			\	'linter_warnings': 'LightlineLinterWarnings',
 			\	'linter_errors': 'LightlineLinterErrors',
