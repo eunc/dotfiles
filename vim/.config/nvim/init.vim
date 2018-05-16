@@ -1,7 +1,6 @@
 call plug#begin('~/dotfiles/vim/.config/nvim/plugged')
 
 " COLORSCHEMES "
-Plug 'chriskempson/base16-vim'
 Plug 'junegunn/seoul256.vim'
 
 " UTILITIES "
@@ -49,11 +48,12 @@ augroup END
 "==============SETTINGS============="
 set encoding=utf8
 set number
-set wrapmargin=8
+set textwidth=0
+set wrapmargin=0
 set linebreak
 set autoindent
 set smartindent
-set laststatus=2 "always display status line
+" set laststatus=2 "always display status line
 set mouse=a "enable mouse
 set history=1000
 set noexpandtab
