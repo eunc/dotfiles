@@ -24,6 +24,11 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'qpkorr/vim-bufkill'
+Plug 'scrooloose/nerdtree'
+
+" fzf"
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " SYNTAX "
 " Plug 'scrooloose/syntastic'
@@ -31,16 +36,17 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'w0rp/ale'
 
 " AUTOCOMPLETE "
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 
 call plug#end()
 
-augroup load_plug
-	autocmd!
-	autocmd InsertEnter * call plug#load('YouCompleteMe')
-				\| autocmd! load_plug
-augroup END
+" augroup load_plug
+	" autocmd!
+	" autocmd InsertEnter * call plug#load('YouCompleteMe')
+				" \| autocmd! load_plug
+" augroup END
+
 
 "==========Python Directory========="
 " let g:python3_host_prog='/usr/local/bin/python3.6'
@@ -74,6 +80,8 @@ set backspace=indent,eol,start
 set dir=~/.config/nvim/backups
 let g:netrw_dirhistmax=0
 
+set omnifunc=syntaxcomplete#Complete
+
 "=============KEYBINDINGS==========="
 let mapleader = ' '
 let g:mapleader = ' '
@@ -94,11 +102,27 @@ map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 nnoremap <C-C> :BD<cr>
 map 0 ^
+nnoremap <silent> <Tab> :bnext<cr>
+nnoremap <silent> <S-Tab> :bprevious<cr>
 
 nnoremap <silent> <leader>c :Commentary<cr>
 nnoremap <leader>q <c-w>z
 nnoremap <silent> <leader>p :CtrlP<cr>
 nnoremap <silent> <leader>t :TagbarToggle<CR>
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+
+" git tracked files
+nnoremap <silent> <leader>f :GFiles<cr>
+" all files
+nnoremap <silent> <leader>F :Files<cr>
+" buffers
+nnoremap <silent> <leader>b :Buffers<cr>
+" buffer history
+nnoremap <silent> <leader>h :History<cr>
+" lines in current buffer
+nnoremap <silent> <leader>l :BLines<cr>
+" lines in loaded buffers
+nnoremap <silent> <leader>L :Lines<cr>
 
 filetype plugin indent on
 
