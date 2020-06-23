@@ -3,6 +3,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
+export PATH=/usr/local/Cellar/bison/3.4.2/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/eunc/.oh-my-zsh
@@ -10,6 +11,9 @@ export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 # export NVIM_TUI_ENABLE_TRUE_COLOR = 1
 # export NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+
+alias python=/usr/local/bin/python3
+alias pip=/usr/local/bin/pip3
 
 alias vim='nvim'
 alias v='nvim'
@@ -25,6 +29,8 @@ alias ..='cd ..'
 
 alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
 alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
+alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -109,3 +115,5 @@ source $ZSH/oh-my-zsh.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 # export PS1=" [ %~ ] ->  "
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

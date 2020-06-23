@@ -2,6 +2,7 @@ call plug#begin('~/dotfiles/vim/.config/nvim/plugged')
 
 " COLORSCHEMES "
 Plug 'junegunn/seoul256.vim'
+Plug 'flazz/vim-colorschemes'
 
 " UTILITIES "
 Plug 'itchyny/lightline.vim'
@@ -13,8 +14,7 @@ Plug 'tpope/vim-rhubarb' " gBrowse
 Plug 'junegunn/gv.vim'
 Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
-Plug 'sickill/vim-pasta'
+" Plug 'sickill/vim-pasta'
 Plug 'kien/ctrlp.vim', {'on': ['CtrlP']}
 Plug 'rking/ag.vim'
 Plug 'majutsushi/tagbar'
@@ -24,7 +24,7 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'qpkorr/vim-bufkill'
-Plug 'scrooloose/nerdtree'
+Plug 'SirVer/ultisnips'
 
 " fzf"
 Plug '/usr/local/opt/fzf'
@@ -35,8 +35,15 @@ Plug 'junegunn/fzf.vim'
 " Plug 'neomake/neomake'
 Plug 'w0rp/ale'
 
+" JS " 
+Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
+Plug 'mxw/vim-jsx'
+
+
+
 " AUTOCOMPLETE "
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 " Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 
 call plug#end()
@@ -47,9 +54,6 @@ call plug#end()
 				" \| autocmd! load_plug
 " augroup END
 
-
-"==========Python Directory========="
-" let g:python3_host_prog='/usr/local/bin/python3.6'
 
 "==============SETTINGS============="
 set encoding=utf8
@@ -71,7 +75,7 @@ set shiftround
 set completeopt+=noselect,menuone,longest
 set completeopt-=preview
 set termguicolors
-set lazyredraw
+" set lazyredraw
 set cursorline
 " set clipboard=unnamed
 set wildignorecase
@@ -80,7 +84,21 @@ set backspace=indent,eol,start
 set dir=~/.config/nvim/backups
 let g:netrw_dirhistmax=0
 
-set omnifunc=syntaxcomplete#Complete
+" omni complete <C-x><C-o>
+" set omnifunc=syntaxcomplete#Complete 
+
+" gdiff vertical split
+set diffopt+=vertical
+
+" snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:SuperTabDefaultCompletionType="<c-n>""
+let g:SuperTabCrMapping=0
+let g:ycm_key_list_select_completion=['<c-j>', '<c-n>', '<down>']
+let g:ycm_key_list_previous_completion=['<c-k>', '<c-p>', '<up>']
+
 
 "=============KEYBINDINGS==========="
 let mapleader = ' '
@@ -102,21 +120,19 @@ map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 nnoremap <C-C> :BD<cr>
 map 0 ^
-nnoremap <silent> <Tab> :bnext<cr>
-nnoremap <silent> <S-Tab> :bprevious<cr>
 
 nnoremap <silent> <leader>c :Commentary<cr>
 nnoremap <leader>q <c-w>z
 nnoremap <silent> <leader>p :CtrlP<cr>
 nnoremap <silent> <leader>t :TagbarToggle<CR>
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+" nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
 " git tracked files
 nnoremap <silent> <leader>f :GFiles<cr>
 " all files
 nnoremap <silent> <leader>F :Files<cr>
 " buffers
-nnoremap <silent> <leader>b :Buffers<cr>
+nnoremap <silent> <leader>B :Buffers<cr>
 " buffer history
 nnoremap <silent> <leader>h :History<cr>
 " lines in current buffer
@@ -225,8 +241,10 @@ let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.config/nvim/plugged/YouComple
 "hi! NeomakeError cterm=underline ctermfg=white
 
 " ale "
-let g:ale_sign_warning = '◆'
-let g:ale_sign_error = '✗'
+" let g:ale_sign_warning = '◆'
+" let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '.'
+let g:ale_sign_error = '●'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 let g:ale_python_flake8_args="--ignore=E501,E265,E221,W293"
